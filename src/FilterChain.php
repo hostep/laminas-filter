@@ -87,7 +87,7 @@ class FilterChain extends AbstractFilter implements Countable, IteratorAggregate
                     foreach ($value as $spec) {
                         $callback = $spec['callback'] ?? false;
                         $priority = $spec['priority'] ?? static::DEFAULT_PRIORITY;
-                        if (is_callable($callback)) {
+                        if (is_callable($callback) || $callback instanceof FilterInterface) {
                             $this->attach($callback, $priority);
                         }
                     }
